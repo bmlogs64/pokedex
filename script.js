@@ -1,3 +1,5 @@
+import * as module from "./modules.js" 
+
 let escolherPokemon = document.querySelector("#escolherPokemon")
 
 let botaoEscolherPokemon = document.querySelector("#botaoEscolherPokemon")
@@ -10,26 +12,23 @@ async function aparecerPokemon() {
 
     const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${escolherPokemon.value}/`)
 
- 
-
     if(resposta.status == 404){
         console.log("error")
         return 0
     }
 
-
-    console.log(resposta)
-
     const dados = await resposta.json()
 
     console.log(dados)
 
-    let imagemPokemon = document.createElement("img")
+    let divPokemonEspecifico = document.createElement('div')
 
-    imagemPokemon.src = dados.sprites.front_default
+    divPokemonEspecifico.classList.add("divPokemonEspecifico")
 
-    divAparecerPokemon.append(imagemPokemon)
+    let imagemPokemon = module.adicionarImagem(dados.sprites.front_default)
 
-    
+    divPokemonEspecifico.append(imagemPokemon)
+
+    divAparecerPokemon.appendChild(divPokemonEspecifico)
 
 }

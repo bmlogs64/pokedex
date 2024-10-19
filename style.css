@@ -34,3 +34,13 @@ h1{
     margin: 0 3em;
 
 }
+
+#divAparecerPokemon{
+    display: flex;
+    justify-content: space-around;
+}
+
+.divPokemonEspecifico{
+    border: 0.2em solid;
+    border-radius: 1em;
+}
