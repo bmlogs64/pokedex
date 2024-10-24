@@ -54,6 +54,8 @@ function limparPokemon(){
 
 async function aparecerPokemon() {
 
+    divAparecerPokemon.innerHTML = ""
+
     for(let i = 1; i <= opcaoQuantidadePokemon.value; i++){
 
         let pokemonAleatorio = Math.floor(Math.random() * 1025) + 1
@@ -76,8 +78,9 @@ async function aparecerPokemon() {
         let imagemPokemon = adicionarImagem(dados.sprites.front_default)
         let nomePokemon = adicionarNome(dados.name)
         let tiposPokemon = adicionarTipos(dados.types)
+        let informacoesPokemon = adicionarLinkInformacoes(dados.name)
 
-        divPokemonEspecifico.append(imagemPokemon,nomePokemon,tiposPokemon)
+        divPokemonEspecifico.append(imagemPokemon,nomePokemon,tiposPokemon, informacoesPokemon)
 
         divAparecerPokemon.appendChild(divPokemonEspecifico)
 
@@ -89,5 +92,19 @@ function primeiraLetra_maiuscula(string) {
 
     if (!string) return string;
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+}
+
+function adicionarLinkInformacoes(nomePokemon){
+
+    let linkInformacoesPokemon = document.createElement("a")
+
+    linkInformacoesPokemon.textContent = "Informações!"
+
+    linkInformacoesPokemon.setAttribute("target", "_blank")
+
+    linkInformacoesPokemon.setAttribute("href", "https://pokemondb.net/pokedex/" + nomePokemon)
+
+    return linkInformacoesPokemon
 
 }
