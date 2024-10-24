@@ -1,6 +1,6 @@
 export {limparPokemon, aparecerPokemon}
 
-import { divAparecerPokemon,escolherPokemon } from "./script.js";
+import { divAparecerPokemon,opcaoQuantidadePokemon } from "./script.js";
 
 function adicionarImagem(urlImagemPokemon) {
 
@@ -54,14 +54,11 @@ function limparPokemon(){
 
 async function aparecerPokemon() {
 
-    if (escolherPokemon.value < 1){
-        console.log("Digite um valor válido")
-        return 0
-    }
+    for(let i = 1; i <= opcaoQuantidadePokemon.value; i++){
 
-    for(let i = 1; i <= escolherPokemon.value; i++){
+        let pokemonAleatorio = Math.floor(Math.random() * 1025) + 1
 
-        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonAleatorio}/`)
 
         if(resposta.status == 404){
             console.log("error")
