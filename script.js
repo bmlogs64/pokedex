@@ -1,7 +1,7 @@
 import * as module from "./modules.js"
-export {divAparecerPokemon, escolherPokemon}
+export {divAparecerPokemon, opcaoQuantidadePokemon}
 
-let escolherPokemon = document.querySelector("#escolherPokemon")
+let opcaoQuantidadePokemon = document.querySelector("#opcaoQuantidadePokemon")
 
 let botaoEscolherPokemon = document.querySelector("#botaoEscolherPokemon")
 
