@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex Bernardo</title>
+    <title>Gerador Aleatorio de Pokemon Bernardo</title>
 
     <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
-
     <header>
-        
-        <h1>Pokedex</h1>
+
+        <h1>Gerador Aleatorio de Pokemon</h1>
 
     </header>
 
@@ -20,15 +19,34 @@
 
         <div id="divinputsEscolherPokemon">
 
-            <label class="itemsHeader" for="escolherPokemon">Quantos Pokemon deseja ver?</label>
-            <select id="opcaoQuantidadePokemon">
+            <label class="itemsHeader" for="opcaoQuantidadePokemon">Quantidade de Pokemon para ver</label>
+            <select class="itemsHeader" id="opcaoQuantidadePokemon">
+
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
+
             </select>
+
+            <label class="itemsHeader" for="regiaoEscolhida">Região Escolhida</label>
+            <select class="itemsHeader" id="regiaoEscolhida">
+
+                <option selected value="Todas">Todas</option>
+                <option value="Kanto">Kanto</option>
+                <option value="Johto">Johto</option>
+                <option value="Hoenn">Hoenn</option>
+                <option value="Sinnoh">Sinnoh</option>
+                <option value="Unova">Unova</option>
+                <option value="Kalos">Kalos</option>
+                <option value="Alola">Alola</option>
+                <option value="Galar">Galar</option>
+                <option value="Paldea">Paldea</option>
+
+            </select>
+
             <input class="itemsHeader" type="button" value="Aparecer Pokemon" id="botaoEscolherPokemon">
             <input class="itemsHeader" type="button" value="Limpar" id="botaoLimparPokemon">
 
