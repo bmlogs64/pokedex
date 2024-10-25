@@ -63,3 +63,17 @@ h1{
     text-transform: uppercase;
 
 }
+
+#imagemSimboloPokedex{
+
+    height: 3em;
+    width: 3em;
+
+}
+
+.shiny{
+
+    height: 1em;
+    width: 1em;
+
+}

@@ -1,12 +1,30 @@
 export {limparPokemon, aparecerPokemon}
 
-import { divAparecerPokemon,opcaoQuantidadePokemon } from "./script.js";
+import { divAparecerPokemon,opcaoQuantidadePokemon, regiaoEscolhida } from "./script.js";
 
-function adicionarImagem(urlImagemPokemon) {
+function adicionarImagem(urlImagemPokemon, nomePokemon ) {
 
     let imagemPokemon = document.createElement("img")
 
-    imagemPokemon.setAttribute("src", urlImagemPokemon)
+    let chanceDeShiny = Math.floor(Math.random() * 1024) + 1
+
+    if (chanceDeShiny == 1024){
+
+        imagemPokemon.setAttribute("src", urlImagemPokemon.front_shiny)
+
+        let simboloShiny = document.createElement("img")
+
+        simboloShiny.setAttribute("src", "/imagens/shiny_symbol_pokemon_swsh_bdsp_by_jormxdos_dffxr02.png")
+
+        simboloShiny.setAttribute("class", "shiny")
+
+        nomePokemon.appendChild(simboloShiny)        
+
+    }else{
+
+        imagemPokemon.setAttribute("src", urlImagemPokemon.front_default)
+
+    }
     
     return imagemPokemon
 
@@ -58,25 +76,14 @@ async function aparecerPokemon() {
 
     for(let i = 1; i <= opcaoQuantidadePokemon.value; i++){
 
-        let pokemonAleatorio = Math.floor(Math.random() * 1025) + 1
-
-        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonAleatorio}/`)
-
-        if(resposta.status == 404){
-            console.log("error")
-            return 0
-        }
-
-        const dados = await resposta.json()
-
-        console.log(dados)
+        let dados = await pegarPokemon()
 
         let divPokemonEspecifico = document.createElement('div')
 
         divPokemonEspecifico.classList.add("divPokemonEspecifico")
 
-        let imagemPokemon = adicionarImagem(dados.sprites.front_default)
         let nomePokemon = adicionarNome(dados.name)
+        let imagemPokemon = adicionarImagem(dados.sprites, nomePokemon)
         let tiposPokemon = adicionarTipos(dados.types)
         let informacoesPokemon = adicionarLinkInformacoes(dados.name)
 
@@ -99,12 +106,103 @@ function adicionarLinkInformacoes(nomePokemon){
 
     let linkInformacoesPokemon = document.createElement("a")
 
-    linkInformacoesPokemon.textContent = "Informações!"
+    let imagemSimboloPokedex = document.createElement("img")
+
+    imagemSimboloPokedex.setAttribute("src", "/imagens/pokemon-3418266_640.png")
+
+    imagemSimboloPokedex.setAttribute("id", "imagemSimboloPokedex")
+
+    linkInformacoesPokemon.appendChild(imagemSimboloPokedex)
 
     linkInformacoesPokemon.setAttribute("target", "_blank")
 
     linkInformacoesPokemon.setAttribute("href", "https://pokemondb.net/pokedex/" + nomePokemon)
 
     return linkInformacoesPokemon
+
+}
+
+async function pegarPokemon(){
+
+    if(regiaoEscolhida.value == "Todas"){
+
+        let dados = await pegarPokemonEspecifico(1,1025)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Kanto"){
+
+        let dados = await pegarPokemonEspecifico(1,151)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Johto"){
+
+        let dados = await pegarPokemonEspecifico(152,251)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Hoenn"){
+
+        let dados = await pegarPokemonEspecifico(252,386)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Sinnoh"){
+
+        let dados = await pegarPokemonEspecifico(387,493)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Unova"){
+
+        let dados = await pegarPokemonEspecifico(494,649)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Kalos"){
+
+        let dados = await pegarPokemonEspecifico(650,721)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Alola"){
+
+        let dados = await pegarPokemonEspecifico(722,809)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Galar"){
+
+        let dados = await pegarPokemonEspecifico(810,905)
+    
+        return dados
+
+    }else if(regiaoEscolhida.value == "Paldea"){
+
+        let dados = await pegarPokemonEspecifico(906,1025)
+    
+        return dados
+
+    }
+
+}
+
+async function pegarPokemonEspecifico(inicioPokedex, finalPokedex) {
+    
+    let pokemonAleatorio = Math.floor(Math.random() * (finalPokedex - inicioPokedex + 1)) + inicioPokedex
+
+        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonAleatorio}/`)
+
+        if(resposta.status == 404){
+            console.log("error")
+            return 0
+        }
+
+        const dados = await resposta.json()
+
+        console.log(dados)
+
+        return dados
 
 }
